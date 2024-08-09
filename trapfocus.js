@@ -8,7 +8,7 @@
  *
  * @returns {Object} - An object with the `create` method to manage the focus trap.
  */
-export function trapFocus() {
+function trapFocus() {
   let beforeFirstElement = null
   let afterLastElement = null
   let observer = null
@@ -152,4 +152,8 @@ export function trapFocus() {
   }
 
   return { create }
+}
+
+module.exports = {
+  trapFocus
 }

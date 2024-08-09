@@ -7,7 +7,7 @@ TrapFocus é uma biblioteca JavaScript simples para criar uma "armadilha de foco
 Você pode instalar o TrapFocus via npm:
 
 ```bash
-npm install @jobs/trapfocus
+npm install trap-focus
 ```
 
 ## Uso
@@ -17,7 +17,7 @@ npm install @jobs/trapfocus
 Importe o módulo em seu código:
 
 ```typescript
-import { trapFocus } from "@jobs/trapfocus"
+import { trapFocus } from "trap-focus"
 ```
 
 ### Criando uma armadilha de foco
