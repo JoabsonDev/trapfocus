@@ -1,11 +1,22 @@
 {
   "name": "jobs-trap-focus",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "scripts": {
     "publish": "npm publish --access public"
   },
-  "keywords": [],
+  "keywords": [
+    "trap-focus",
+    "focus-trap",
+    "javascript",
+    "a11y",
+    "acessibilidade",
+    "modal",
+    "dialog",
+    "focus-trap-js",
+    "trap-focus-js",
+    "trap-focus-js-library"
+  ],
   "author": "",
   "license": "ISC",
   "description": "TrapFocus é uma biblioteca JavaScript simples para criar uma \"armadilha de foco\" dentro de um elemento contêiner, garantindo que o foco permaneça dentro do contêiner ao navegar com o teclado. Isso é útil para criar modais acessíveis, diálogos e outros componentes que requerem foco restrito.",
