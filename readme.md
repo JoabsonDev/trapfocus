@@ -25,7 +25,7 @@ import { trapFocus } from "jobs-trap-focus"
 Se preferir, você pode usar o TrapFocus diretamente em seu projeto via CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/JoabsonDev/trapfocus/trapfocus.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/JoabsonDev/trapfocus@jsdelivr/trapfocus.js"></script>
 ```
 
 ### Criando uma armadilha de foco
