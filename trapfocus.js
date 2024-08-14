@@ -34,13 +34,8 @@ function trapFocus() {
     const firstElement = focusableElements[0]
     const lastElement = focusableElements[focusableElements.length - 1]
 
-    beforeFirstElement = document.createElement("div")
-    beforeFirstElement.setAttribute("tabindex", "0")
-    beforeFirstElement.setAttribute("aria-hidden", "true")
-
-    afterLastElement = document.createElement("div")
-    afterLastElement.setAttribute("tabindex", "0")
-    afterLastElement.setAttribute("aria-hidden", "true")
+    beforeFirstElement = createGhostElement()
+    afterLastElement = createGhostElement()
 
     // Using insertAdjacentElement to add "ghost" elements
     containerElement.insertAdjacentElement("afterbegin", beforeFirstElement)
@@ -75,6 +70,18 @@ function trapFocus() {
       observer.disconnect()
       observer = null // Clear reference
     }
+  }
+
+  /**
+   * Creates a "ghost" element for trapping focus.
+   *
+   * @returns {HTMLElement} - A div element with tabindex and aria-hidden attributes.
+   */
+  function createGhostElement() {
+    const element = document.createElement("div")
+    element.setAttribute("tabindex", "0")
+    element.setAttribute("aria-hidden", "true")
+    return element
   }
 
   /**
@@ -152,8 +159,4 @@ function trapFocus() {
   }
 
   return { create }
-}
-
-module.exports = {
-  trapFocus
 }
