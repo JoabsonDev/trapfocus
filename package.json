@@ -1,9 +1,9 @@
 {
   "name": "jobs-trap-focus",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish": "npm publish --access public"
   },
   "keywords": [],
   "author": "",

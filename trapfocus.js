@@ -1,3 +1,8 @@
+import createGhostElement from "./utils/createGhostElement.js"
+import getFocusableElements from "./utils/getFocusableElements.js"
+import setInitialFocus from "./utils/setInitialFocus.js"
+import setupFocusListeners from "./utils/setupFocusListeners.js"
+
 /**
  * Creates a focus trap within a container element.
  *
@@ -8,7 +13,7 @@
  *
  * @returns {Object} - An object with the `create` method to manage the focus trap.
  */
-function trapFocus() {
+export function trapFocus() {
   let beforeFirstElement = null
   let afterLastElement = null
   let observer = null
@@ -34,13 +39,8 @@ function trapFocus() {
     const firstElement = focusableElements[0]
     const lastElement = focusableElements[focusableElements.length - 1]
 
-    beforeFirstElement = document.createElement("div")
-    beforeFirstElement.setAttribute("tabindex", "0")
-    beforeFirstElement.setAttribute("aria-hidden", "true")
-
-    afterLastElement = document.createElement("div")
-    afterLastElement.setAttribute("tabindex", "0")
-    afterLastElement.setAttribute("aria-hidden", "true")
+    beforeFirstElement = createGhostElement()
+    afterLastElement = createGhostElement()
 
     // Using insertAdjacentElement to add "ghost" elements
     containerElement.insertAdjacentElement("afterbegin", beforeFirstElement)
@@ -65,67 +65,15 @@ function trapFocus() {
   function destroy() {
     if (beforeFirstElement && beforeFirstElement.parentNode) {
       beforeFirstElement.parentNode.removeChild(beforeFirstElement)
-      beforeFirstElement = null // Clear reference
+      beforeFirstElement = null
     }
     if (afterLastElement && afterLastElement.parentNode) {
       afterLastElement.parentNode.removeChild(afterLastElement)
-      afterLastElement = null // Clear reference
+      afterLastElement = null
     }
     if (observer) {
       observer.disconnect()
-      observer = null // Clear reference
-    }
-  }
-
-  /**
-   * Gets all focusable elements within a given container.
-   *
-   * @param {HTMLElement} container - The container element.
-   * @returns {HTMLElement[]} - An array of focusable elements.
-   */
-  function getFocusableElements(container) {
-    return Array.from(
-      container.querySelectorAll(
-        'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-      )
-    ).filter((element) => !element.hasAttribute("disabled"))
-  }
-
-  /**
-   * Sets up focus listeners on the "ghost" elements to trap focus within the container.
-   *
-   * @param {HTMLElement} firstElement - The first focusable element.
-   * @param {HTMLElement} lastElement - The last focusable element.
-   * @param {HTMLElement} beforeFirstElement - The "ghost" element before the first focusable element.
-   * @param {HTMLElement} afterLastElement - The "ghost" element after the last focusable element.
-   */
-  function setupFocusListeners(
-    firstElement,
-    lastElement,
-    beforeFirstElement,
-    afterLastElement
-  ) {
-    beforeFirstElement.addEventListener("focus", () => lastElement.focus())
-    afterLastElement.addEventListener("focus", () => firstElement.focus())
-  }
-
-  /**
-   * Sets the initial focus to the specified element or the first focusable element.
-   *
-   * @param {HTMLElement} firstElement - The first focusable element.
-   * @param {string|HTMLElement} [initialFocusElement] - The initial focus element or its CSS selector.
-   */
-  function setInitialFocus(firstElement, initialFocusElement) {
-    let initialFocus = firstElement
-    if (initialFocusElement) {
-      initialFocus =
-        typeof initialFocusElement === "string"
-          ? document.querySelector(initialFocusElement)
-          : initialFocusElement
-    }
-
-    if (initialFocus) {
-      initialFocus.focus()
+      observer = null
     }
   }
 
@@ -152,8 +100,4 @@ function trapFocus() {
   }
 
   return { create }
-}
-
-module.exports = {
-  trapFocus
 }
